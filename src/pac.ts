@@ -8,6 +8,8 @@ export default async function pac(...args: string[]) {
   process.stdout?.pipe(stdout);
   const endPromise = new Promise((resolve) => {
     process.addListener("exit", resolve);
+    process.addListener("close", resolve);
+    process.addListener("disconnect", resolve);
   });
   await Promise.race([process, endPromise]);
 }
