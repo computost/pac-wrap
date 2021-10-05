@@ -6,5 +6,8 @@ export default async function pac(...args: string[]) {
   const pacPath = await getPacPath();
   const process = execa(pacPath, args);
   process.stdout?.pipe(stdout);
-  await process;
+  const endPromise = new Promise((resolve) => {
+    process.addListener("exit", resolve);
+  });
+  await Promise.race([process, endPromise]);
 }

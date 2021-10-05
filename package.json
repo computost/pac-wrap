@@ -27,7 +27,7 @@
   "dependencies": {
     "commander": "^8.2.0",
     "execa": "^5.1.1",
-    "pac-fetch": "0.0.28"
+    "pac-fetch": "0.0.29"
   },
   "devDependencies": {
     "@types/node": "^16.10.2",
