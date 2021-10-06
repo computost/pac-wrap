@@ -1,5 +1,5 @@
 import execa from "execa";
-import { stderr, stdin, stdout } from "process";
+import { stderr, stdout } from "process";
 import getPacPath from "./getPacPath.js";
 
 export default async function pac(...args: string[]) {
@@ -7,9 +7,6 @@ export default async function pac(...args: string[]) {
   const process = execa(pacPath, args, { detached: true });
   process.stdout!.pipe(stdout);
   process.stderr!.pipe(stderr);
-  stdin.pipe(process.stdin!);
-  process.on("close", () => {
-    stdin.unpipe(process.stdin!);
-  });
+  process.unref();
   await process;
 }
