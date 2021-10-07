@@ -2,7 +2,7 @@ import pac from "../../pac.js";
 
 export default async function exportSolution(options: ExportSolutionOptions) {
   const args = createArgs(options);
-  await pac("solution", "export", ...args);
+  return pac("solution", "export", ...args);
 }
 
 function createArgs(options: ExportSolutionOptions) {
