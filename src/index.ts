@@ -1,3 +1,3 @@
-export * from "./commands/help";
-export * from "./commands/solution/export";
-export * from "./commands/telemetry/disable";
+export { default as help } from "./commands/help.js";
+export * from "./commands/solution/index.js";
+export * from "./commands/telemetry/index.js";
