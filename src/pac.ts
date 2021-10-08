@@ -1,5 +1,7 @@
 import execa, { ExecaChildProcess } from "execa";
+import { platform } from "os";
 import {
+  abort,
   kill,
   stderr as defaultStderr,
   stdout as defaultStdout,
@@ -32,7 +34,9 @@ export default async function pac(args: string[], options?: PacOptions) {
    * exiting. */
   return new Promise<number>((resolve, reject) => {
     process.on("exit", (code) => {
-      process.kill("SIGKILL");
+      if (platform() !== "win32") {
+        kill(process.pid!);
+      }
       if (code === 0) {
         resolve(code);
       } else {
