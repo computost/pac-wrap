@@ -1,4 +1,4 @@
-import { NonUndefined } from "../types";
+import { NonUndefined } from "../types.js";
 
 export default function createArgs<TOptions>(
   options: TOptions,

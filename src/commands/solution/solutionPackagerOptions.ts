@@ -3,8 +3,8 @@ import {
   PackageType,
   SingleComponent,
   YesNoPrompt,
-} from "../../types";
-import createArgs from "../createArgs";
+} from "../../types.js";
+import createArgs from "../createArgs.js";
 
 export function createSolutionPackagerArgs(options: SolutionPackagerOptions) {
   return createArgs(options, {
