@@ -9,7 +9,7 @@
     "declaration": true,
     "outDir": "dist"
   },
-  "include": ["./src"],
+  "include": ["./src", "src/commands/PacEntry/.ts"],
   "ts-node": {
     "transpileOnly": true
   }

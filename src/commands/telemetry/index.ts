@@ -1,3 +1,3 @@
-export { default as disableTelemetry } from "./disable.js";
-export { default as enableTelemetry } from "./enable.js";
-export { default as showTelemetryStatus } from "./status.js";
+export { disableTelemetry } from "./disable.js";
+export { enableTelemetry } from "./enable.js";
+export { showTelemetryStatus } from "./status.js";

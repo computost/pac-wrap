@@ -1,18 +1,5 @@
 export type PackageType = "Managed" | "Unmanaged" | "Both";
 
-export type IncludeSetting =
-  | "autonumbering"
-  | "calendar"
-  | "customization"
-  | "emailtracking"
-  | "externalapplications"
-  | "general"
-  | "isvconfig"
-  | "marketing"
-  | "outlooksynchronization"
-  | "relationshiproles"
-  | "sales";
-
 export type ErrorLevel = "Verbose" | "Info" | "Warning" | "Error" | "Off";
 
 export type SingleComponent = "WebResource" | "Plugin" | "Workflow" | "None";

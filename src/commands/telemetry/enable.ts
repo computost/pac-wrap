@@ -1,5 +1,5 @@
-import pac from "../../pac.js";
+import pac, { PacOptions } from "../../pac.js";
 
-export default function enableTelemetry() {
-  return pac("telemetry", "enable");
+export function enableTelemetry(pacOptions?: PacOptions) {
+  return pac(["telemetry", "enable"], pacOptions);
 }

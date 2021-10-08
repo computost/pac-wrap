@@ -1,5 +1,6 @@
-import pac from "../../pac.js";
+import { kill } from "process";
+import pac, { PacOptions } from "../../pac.js";
 
-export default function disableTelemetry() {
-  return pac("telemetry", "disable");
+export function disableTelemetry(pacOptions?: PacOptions) {
+  return pac(["telemetry", "disable"], pacOptions);
 }

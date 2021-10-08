@@ -1,14 +1,6 @@
 #!/usr/bin/env node
-import { program } from "commander";
-import registerSolutionCommands from "./commands/solution/registerCommands.js";
-import registerTelemetryCommands from "./commands/telemetry/registerCommands.js";
-import { registerCommand as registerHelp } from "./commands/help.js";
-import version from "./version.js";
+import { argv, exit } from "process";
+import pac from "./pac.js";
 
-program.version(version);
-
-registerHelp(program);
-registerSolutionCommands(program);
-registerTelemetryCommands(program);
-
-program.parse();
+const args = argv.slice(2);
+pac(args).then(exit).catch(exit);

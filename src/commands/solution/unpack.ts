@@ -1,23 +1,13 @@
-import { Command } from "commander";
-import pac from "../../pac.js";
-import createActionWrapper from "../createActionWrapper.js";
+import pac, { PacOptions } from "../../pac.js";
 import {
   createSolutionPackagerArgs,
-  registerSolutionPackagerOptions,
   SolutionPackagerOptions,
 } from "./solutionPackagerOptions.js";
 
-export default async function unpackSolution(options: SolutionPackagerOptions) {
+export function unpackSolution(
+  options: SolutionPackagerOptions,
+  pacOptions?: PacOptions
+) {
   const args = createSolutionPackagerArgs(options);
-  return pac("solution", "pack", ...args);
-}
-
-export function registerCommand(solution: Command) {
-  const command = solution
-    .command("unpack")
-    .description(
-      "Extract solution components from solution.zip onto local filesystem (SolutionPackager)"
-    )
-    .action(createActionWrapper(unpackSolution));
-  registerSolutionPackagerOptions(command);
+  return pac(["solution", "pack", ...args], pacOptions);
 }

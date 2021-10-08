@@ -1,5 +1,5 @@
-import pac from "../../pac.js";
+import pac, { PacOptions } from "../../pac.js";
 
-export default function showTelemetryStatus() {
-  return pac("telemetry", "status");
+export function showTelemetryStatus(pacOptions?: PacOptions) {
+  return pac(["telemetry", "status"], pacOptions);
 }
