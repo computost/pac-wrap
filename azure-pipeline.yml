@@ -1,7 +1,0 @@
-pool:
-  vmImage: ubuntu-latest
-
-steps:
-  - script: |
-      npm ci
-      npm start -- help
