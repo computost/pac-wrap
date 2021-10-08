@@ -1,5 +1,6 @@
 import { Command } from "commander";
 import { registerCommand as registerExport } from "./export.js";
+import { registerCommand as registerPack } from "./pack.js";
 import { registerCommand as registerUnpack } from "./unpack.js";
 
 export default function registerSolutionCommands(program: Command) {
@@ -7,5 +8,6 @@ export default function registerSolutionCommands(program: Command) {
     .command("solution")
     .description("Commands for working with Dataverse solution projects");
   registerExport(solution);
+  registerPack(solution);
   registerUnpack(solution);
 }
