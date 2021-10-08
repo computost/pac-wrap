@@ -30,16 +30,16 @@ export default async function pac(args: string[], options?: PacOptions) {
   /** Need to return this promise instead of the process object as a
    * work-around for a current bug in Azure DevOps where pac will hang after
    * exiting. */
-  return new Promise<number>((resolve, reject) =>
+  return new Promise<number>((resolve, reject) => {
     process.on("exit", (code) => {
-      kill(process.pid!);
+      process.kill();
       if (code === 0) {
         resolve(code);
       } else {
         reject(code);
       }
-    })
-  );
+    });
+  });
 }
 
 export interface PacOptions {
