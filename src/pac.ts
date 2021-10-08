@@ -32,7 +32,7 @@ export default async function pac(args: string[], options?: PacOptions) {
    * exiting. */
   return new Promise<number>((resolve, reject) => {
     process.on("exit", (code) => {
-      kill(process.pid!);
+      process.kill("SIGKILL");
       if (code === 0) {
         resolve(code);
       } else {
