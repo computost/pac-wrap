@@ -3,41 +3,19 @@ import { EOL } from "os";
 import pac from "../../pac.js";
 import { IncludeSetting } from "../../types.js";
 import createActionWrapper from "../createActionWrapper.js";
+import createArgs from "../createArgs.js";
 
 export default async function exportSolution(options: ExportSolutionOptions) {
-  const args = createArgs(options);
+  const args = createArgs(options, {
+    targetVersion: "targetversion",
+    include: (value, args) => {
+      for (const setting of value) {
+        args.push("--include", setting);
+      }
+    },
+    maxAsyncWaitTime: "max-async-wait-time",
+  });
   return pac("solution", "export", ...args);
-}
-
-function createArgs(options: ExportSolutionOptions) {
-  const {
-    path,
-    name,
-    managed,
-    targetVersion,
-    include,
-    async,
-    maxAsyncWaitTime,
-  } = options;
-  const args = ["--path", path, "--name", name];
-  if (managed) {
-    args.push("--managed");
-  }
-  if (targetVersion) {
-    args.push("--targetversion", targetVersion);
-  }
-  if (include) {
-    for (const setting of include) {
-      args.push("--include", setting);
-    }
-  }
-  if (async) {
-    args.push("--async");
-  }
-  if (maxAsyncWaitTime) {
-    args.push("max-async-wait-time", `${maxAsyncWaitTime}`);
-  }
-  return args;
 }
 
 export function registerCommand(solution: Command) {
@@ -82,7 +60,8 @@ export function registerCommand(solution: Command) {
     .option("-a, --async", "Exports solution asynchronously")
     .option(
       "-wt, --maxAsyncWaitTime <minutes>",
-      "Max asynchronous wait time in minutes. Default value is 60 mintues"
+      "Max asynchronous wait time in minutes. Default value is 60 minutes",
+      parseInt
     )
     .action(createActionWrapper(exportSolution));
 }
