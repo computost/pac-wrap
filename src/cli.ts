@@ -3,4 +3,4 @@ import { argv, exit } from "process";
 import pac from "./pac.js";
 
 const args = argv.slice(2);
-pac(args).then(exit).catch(exit);
+pac(args).catch(exit);

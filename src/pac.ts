@@ -1,5 +1,9 @@
 import execa, { ExecaChildProcess } from "execa";
-import { stderr as defaultStderr, stdout as defaultStdout } from "process";
+import {
+  kill,
+  stderr as defaultStderr,
+  stdout as defaultStdout,
+} from "process";
 import getPacPath from "./getPacPath.js";
 
 export default async function pac(args: string[], options?: PacOptions) {
@@ -28,6 +32,7 @@ export default async function pac(args: string[], options?: PacOptions) {
    * exiting. */
   return new Promise<number>((resolve, reject) =>
     process.on("exit", (code) => {
+      kill(process.pid!);
       if (code === 0) {
         resolve(code);
       } else {
