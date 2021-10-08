@@ -4,7 +4,7 @@ import { stderr as defaultStderr, stdout as defaultStdout } from "process";
 import { fileURLToPath } from "url";
 import getPacPath from "./getPacPath.js";
 
-export default async function pac(args: string[], options?: PacOptions) {
+export async function pac(args: string[], options?: PacOptions) {
   const pacPath = await getPacPath();
   let process: ExecaChildProcess<string>;
   if (options && (options.stderr || options.stdout)) {

@@ -1,4 +1,4 @@
-import pac, { PacOptions } from "../../pac.js";
+import { PacOptions, pac } from "../../pac.js";
 import createArgs from "../createArgs.js";
 
 export async function importSolution(
