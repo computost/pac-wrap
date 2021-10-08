@@ -1,11 +1,7 @@
-import execa, { ExecaChildProcess } from "execa";
-import { platform } from "os";
-import {
-  abort,
-  kill,
-  stderr as defaultStderr,
-  stdout as defaultStdout,
-} from "process";
+import execa, { ExecaChildProcess, node } from "execa";
+import { dirname, join } from "path";
+import { stderr as defaultStderr, stdout as defaultStdout } from "process";
+import { fileURLToPath } from "url";
 import getPacPath from "./getPacPath.js";
 
 export default async function pac(args: string[], options?: PacOptions) {
@@ -24,26 +20,20 @@ export default async function pac(args: string[], options?: PacOptions) {
       process.stdout!.pipe(stdout ?? defaultStdout);
     }
   } else {
-    process = execa(pacPath, args);
+    /** Need to run this in a child process as a work-around for a current bug
+     * in Azure DevOps where pac will hang after exiting. */
+    process = node(join(getDirName(), "pac-child.js"), [pacPath, ...args]);
     process.stderr!.pipe(defaultStderr);
     process.stdout!.pipe(defaultStdout);
   }
 
-  /** Need to return this promise instead of the process object as a
-   * work-around for a current bug in Azure DevOps where pac will hang after
-   * exiting. */
-  return new Promise<number>((resolve, reject) => {
-    process.on("exit", (code) => {
-      if (platform() !== "win32") {
-        kill(process.pid!);
-      }
-      if (code === 0) {
-        resolve(code);
-      } else {
-        reject(code);
-      }
-    });
-  });
+  return await process;
+}
+
+function getDirName() {
+  const fileName = fileURLToPath(import.meta.url);
+  const dirName = dirname(fileName);
+  return dirName;
 }
 
 export interface PacOptions {
