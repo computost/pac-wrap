@@ -16,7 +16,7 @@ export function registerCommand(solution: Command) {
   const command = solution
     .command("unpack")
     .description(
-      "Extract solution components from solution.zip onto local filesystem (SolutionPackager)"
+      "Package solution components on local filesystem into solution.zip (SolutionPackager)"
     )
     .action(createActionWrapper(packSolution));
   registerSolutionPackagerOptions(command);
