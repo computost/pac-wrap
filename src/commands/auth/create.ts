@@ -6,7 +6,7 @@ export function createAuth(
   pacOptions?: PacOptions
 ) {
   const args = createArgs(options);
-  return pac(args, pacOptions);
+  return pac(["auth", "create", ...args], pacOptions);
 }
 
 interface CreateAuthOptions {
