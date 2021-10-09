@@ -9,5 +9,5 @@ export function unpackSolution(
   pacOptions?: PacOptions
 ) {
   const args = createSolutionPackagerArgs(options);
-  return pac(["solution", "pack", ...args], pacOptions);
+  return pac(["solution", "unpack", ...args], pacOptions);
 }
