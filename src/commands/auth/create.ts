@@ -5,7 +5,7 @@ export function createAuth(
   options: CreateAuthOptions,
   pacOptions?: PacOptions
 ) {
-  const args = createArgs(options);
+  const args = createArgs(options, { tenantId: "tenant" });
   return pac(["auth", "create", ...args], pacOptions);
 }
 
