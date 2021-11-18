@@ -27,7 +27,7 @@
   "license": "ISC",
   "dependencies": {
     "execa": "^5.1.1",
-    "pac-fetch": "0.0.30"
+    "pac-fetch": "0.0.31"
   },
   "devDependencies": {
     "@types/node": "^16.10.2",
