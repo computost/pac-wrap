@@ -1,7 +1,7 @@
 import { join } from "path";
-import getPacFolder from "./getPacFolder";
-import getPacFileName from "./commands/getPacFileName";
-import pathExists from "./pathExists";
+import getPacFolder from "./getPacFolder.js";
+import getPacFileName from "./commands/getPacFileName.js";
+import pathExists from "./pathExists.js";
 
 let path: Promise<string>;
 

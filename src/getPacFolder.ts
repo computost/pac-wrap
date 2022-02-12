@@ -3,7 +3,8 @@ import { join } from "path";
 import { env } from "process";
 import fetchPowerPlatformCli from "pac-fetch";
 import { stat } from "fs/promises";
-import getPacFileName from "./commands/getPacFileName";
+import getPacFileName from "./commands/getPacFileName.js";
+import pathExists from "./pathExists.js";
 
 let path: Promise<string>;
 
@@ -29,19 +30,6 @@ async function getBasePath() {
     return fetchPowerPlatformCli();
   } else {
     return env.PAC_PATH;
-  }
-}
-
-async function pathExists(path: string) {
-  try {
-    await stat(path);
-    return true;
-  } catch (error: any) {
-    if (error.code === "ENOENT") {
-      return false;
-    } else {
-      throw error;
-    }
   }
 }
 
