@@ -8,11 +8,11 @@ import pathExists from "./pathExists.js";
 
 let path: Promise<string>;
 
-export default function getPacFolder(): Promise<string> {
+export default function getPacFolder(version?: string): Promise<string> {
   if (!path) {
     path = (async () => {
       const platform = getPlatform();
-      const basePath = await getBasePath();
+      const basePath = await getBasePath(version);
       const pacFileName = getPacFileName();
       if (!(await pathExists(join(basePath, pacFileName)))) {
         const platformFolder = getPlatformFolder(platform);
@@ -25,9 +25,9 @@ export default function getPacFolder(): Promise<string> {
   return path;
 }
 
-async function getBasePath() {
+async function getBasePath(version?: string) {
   if (env.PAC_PATH === undefined) {
-    return fetchPowerPlatformCli();
+    return fetchPowerPlatformCli({version});
   } else {
     return env.PAC_PATH;
   }
